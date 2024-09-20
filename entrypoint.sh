@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-#git config --global --add safe.directory /github/workspace
+git config --global --add safe.directory /github/workspace
 VERSION=$(/.venv/bin/git_version version $1 --path-to-pyproject $2)
 exit_code=$?
 if [ $exit_code -ne 0 ]; then
