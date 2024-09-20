@@ -9,6 +9,9 @@ inputs:
     description: 'Path to pyproject.toml file containing config for git-version. Defaults pyproject in root repo.'
     required: false
     default: './pyproject.toml'
+outputs:
+  version:
+    description: 'Version string'
 runs:
   using: 'docker'
   image: 'Dockerfile'

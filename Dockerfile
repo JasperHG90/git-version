@@ -19,5 +19,6 @@ FROM python:3.11.9-slim-bookworm
 
 COPY --from=build /.venv /.venv
 COPY --from=build /git_version /git_version
+COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT [ "/.venv/bin/git-version", "run" ]
+ENTRYPOINT [ "/entrypoint.sh" ]

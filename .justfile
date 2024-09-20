@@ -23,5 +23,5 @@ test:
   uv run pytest tests
 
 # Build dockerfile for DAG
-build dialect:
+build:
   docker build -t git_version .

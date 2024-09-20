@@ -24,6 +24,7 @@ build-backend = "hatchling.build"
 [tool.uv]
 dev-dependencies = [
     "pre-commit>=3.8.0",
+    "pytest-cov>=5.0.0",
 ]
 
 [tool.black]

@@ -1,0 +1,32 @@
+name: tests
+description: "Template that runs pytest"
+
+inputs:
+    python_version:
+        description: "Python version to use."
+        required: false
+        default: "3.11"
+    path:
+        description: "Path to tests."
+        required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python_version }}
+    - name: Install uv
+      uses: astral-sh/setup-uv@v2
+      with:
+        uv-version: "0.4.12"
+    - name: install dependencies
+      run: |
+        uv sync
+      shell: bash
+    - name: run tests
+      run: |
+        uv run coverage run -m pytest ${{ inputs.path }} -v -s
+      shell: bash

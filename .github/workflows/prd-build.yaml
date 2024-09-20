@@ -27,31 +27,21 @@ jobs:
           python_version: "3.11"
           pre_commit_version: "3.1.1"
           directory: "."
-  test_action_postgres:
+  tests:
     runs-on: ubuntu-latest
-    name: 'Test GHA (postgres)'
     needs: checks
-    services:
-      database:
-        image: postgres:15.1
-        env:
-          POSTGRES_DB: testdb
-          POSTGRES_PASSWORD: password
-          POSTGRES_USER: user
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: 'tests'
+        uses: ./.github/workflows/templates/tests
+        with:
+          python_version: "3.11"
+          directory: "."
+  test_git_version_action:
+    runs-on: ubuntu-latest
+    name: 'Test GHA'
+    needs: tests
     steps:
       - uses: actions/checkout@v4
       - uses: ./
-        env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DATABASE: testdb
-          POSTGRES_HOST: database
-          POSTGRES_PORT: 5432
-        with:
-          file: '.github/workflows/utils/sql/example_postgres.sql'
-          dialect: 'postgres'
