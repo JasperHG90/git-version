@@ -43,5 +43,7 @@ jobs:
     name: 'Test GHA'
     needs: tests
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: 'Get version'
+        uses: ./
