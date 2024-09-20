@@ -1,0 +1,17 @@
+name: 'Git version'
+description: 'Retrieve version string based on git history and tags'
+inputs:
+  repo:
+    description: 'Repository path. Defaults to root repo.'
+    required: false
+    default: '.'
+  pyproject_path:
+    description: 'Path to pyproject.toml file containing config for git-version. Defaults pyproject in root repo.'
+    required: false
+    default: './pyproject.toml'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.repo }}
+    - ${{ inputs.pyproject_path }}
