@@ -100,3 +100,7 @@ def version(
         _config.get_version_config(path_to_pyproject),
     )
     typer.echo(ver.version)
+
+
+def entrypoint():
+    app()

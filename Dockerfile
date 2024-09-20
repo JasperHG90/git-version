@@ -17,8 +17,14 @@ ENV PATH="/.venv/bin:$PATH"
 
 FROM python:3.11.9-slim-bookworm
 
+RUN apt-get -y update \
+    && apt-get -y install git \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=build /.venv /.venv
 COPY --from=build /git_version /git_version
 COPY entrypoint.sh /entrypoint.sh
+
+RUN ["chmod", "+x", "/entrypoint.sh"]
 
 ENTRYPOINT [ "/entrypoint.sh" ]
