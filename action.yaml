@@ -5,10 +5,6 @@ inputs:
     description: 'Repository path. Defaults to root repo.'
     required: false
     default: '.'
-  pyproject_path:
-    description: 'Path to pyproject.toml file containing config for git-version. Defaults pyproject in root repo.'
-    required: false
-    default: './pyproject.toml'
 outputs:
   version:
     description: 'Version string'
@@ -17,4 +13,3 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.repo_path }}
-    - ${{ inputs.pyproject_path }}
