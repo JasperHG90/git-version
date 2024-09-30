@@ -19,7 +19,6 @@ jobs:
   test_git_version_action:
     runs-on: ubuntu-latest
     name: 'Test GHA'
-    needs: checks
     steps:
       - name: checkout
         uses: actions/checkout@v4
