@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
       - name: 'Get version'
         id: version
-        uses: JasperHG90/git-version@v1.0.0
+        uses: JasperHG90/git-version@v2.0.0
       - name: 'Print version'
         run: echo "Version is ${{ steps.version.outputs.version }}"
 ```
