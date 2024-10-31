@@ -2,7 +2,7 @@
 
 git config --global --add safe.directory /github/workspace
 cd $1
-VERSION=$(bash git_version.sh)
+VERSION=$(bash /git_version.sh)
 exit_code=$?
 if [ $exit_code -ne 0 ]; then
   echo "Failed to get version"
