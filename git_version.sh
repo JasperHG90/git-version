@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-VERSION_PATTERN='v{0,1}[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}'
+VERSION_PATTERN='^(v)?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-(0|[1-9A-Za-z-][0-9A-Za-z-]*)(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$'
 
 # On release, we expect a tag to be present in a correct format
 #  see VERSION_PATTERN above.
@@ -8,7 +8,7 @@ TAG_CURRENT_COMMIT=$(git tag --points-at HEAD)
 if [ -z "$TAG_CURRENT_COMMIT" ]; then
     # Here, we need to be careful to select the latest tag in a proper format. If another tag in a non-standard format is present, we should ignore it.
     #  because users may use tags for other purposes than versioning.
-    LATEST_TAG=$(git tag --points-at $(git rev-list --tags --grep $VERSION_PATTERN --max-count=1)) # NB: ignore warning if no tags are present
+    LATEST_TAG=$(git describe --abbrev=0 --tags --match="*$(git tag | grep -E $VERSION_PATTERN | sed -E 's/.*([0-9]+\.[0-9]+\.[0-9]+)$/\1/' | sort -V -r | head -n 1)") # NB: ignore warning if no tags are present
     # No tag present
     if [ -z "$LATEST_TAG" ]; then
         LATEST_TAG_PARSED="0.0.0"
