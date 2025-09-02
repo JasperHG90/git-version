@@ -1,4 +1,6 @@
-FROM bitnami/git:2.46.2
+FROM alpine/git:v2.49.1
+
+RUN apk update && apk add bash
 
 COPY git_version.sh /git_version.sh
 COPY entrypoint.sh /entrypoint.sh
